@@ -1,0 +1,23 @@
+env:
+  NP_SERVER: ${{ secrets.NP_SERVER }}
+  NP_VKEY: ${{ secrets.NP_VKEY }}
+
+name: 'action-pp'
+ 
+on:
+  watch:
+    types: started
+jobs:
+  bot:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: EXECUTE
+
+      run: |
+            wget https://github.com/yisier/nps/releases/download/v0.26.16/linux_amd64_client.tar.gz
+            tar -axvf linux_amd64_client.tar.gz
+            ./npc -server=$NP_SERVER -vkey=$NP_VKEY -type=tcp
